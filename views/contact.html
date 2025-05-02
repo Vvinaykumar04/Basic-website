@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Contact Us</h1>
+  
+  <form action="/contact" method="POST">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name"><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email"><br><br>
+
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" rows="5"></textarea><br><br>
+
+    <button type="submit">Send</button>
+  </form>
+
+  <p>Email: contact@example.com</p>
+  <a href="/">Back to Home</a>
+
+  <!-- jQuery and validation script -->
+  <script src="/js/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('form').on('submit', function (e) {
+        let isValid = true;
+        const name = $('#name').val().trim();
+        const email = $('#email').val().trim();
+        const message = $('#message').val().trim();
+
+        $('.error').remove();
+
+        if (name === '') {
+          $('#name').after('<span class="error" style="color:red;">Name is required</span>');
+          isValid = false;
+        }
+
+        if (email === '') {
+          $('#email').after('<span class="error" style="color:red;">Email is required</span>');
+          isValid = false;
+        } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+          $('#email').after('<span class="error" style="color:red;">Enter a valid email</span>');
+          isValid = false;
+        }
+
+        if (message === '') {
+          $('#message').after('<span class="error" style="color:red;">Message is required</span>');
+          isValid = false;
+        }
+
+        if (!isValid) {
+          e.preventDefault();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
