@@ -29,6 +29,7 @@ router.post('/contact', (req, res) => {
     const { name, email, message } = req.body;
 
     console.log('Form submitted:', { name, email, message });
+    console.log('Form submitted:', { name, email, message });
 
     res.send(`<h1>Thanks, ${name}!</h1><p>Your message has been received.</p><a href="/">Back to Home</a>`);
 });
