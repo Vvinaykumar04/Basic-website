@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 const router = express.Router();
-
+const Contact = require('./models/Contact');
 
 // Home page
 router.get('/', (req, res) => {
@@ -28,8 +28,16 @@ router.get('/services', (req, res) => {
 router.post('/contact', (req, res) => {
     const { name, email, message } = req.body;
 
-    console.log('Form submitted:', { name, email, message });
-    console.log('Form submitted:', { name, email, message });
+    try {
+        const newContact = new Contact({ name, email, message });
+        await newContact.save();
+        console.log('Form data saved:', newContact);
+
+        res.send(`<h1>Thanks, ${name}!</h1><p>Your message has been received.</p><a href="/">Back to Home</a>`);
+    } catch (error) {
+        console.error('Error saving contact data:', error);
+        res.status(500).send('An error occurred while saving your message.');
+    }
 
     res.send(`<h1>Thanks, ${name}!</h1><p>Your message has been received.</p><a href="/">Back to Home</a>`);
 });
