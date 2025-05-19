@@ -25,21 +25,17 @@ router.get('/services', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'services.html'));
 });
 
-router.post('/contact', (req, res) => {
+router.post('/contact', async (req, res) => {
     const { name, email, message } = req.body;
 
     try {
         const newContact = new Contact({ name, email, message });
         await newContact.save();
-        console.log('Form data saved:', newContact);
-
         res.send(`<h1>Thanks, ${name}!</h1><p>Your message has been received.</p><a href="/">Back to Home</a>`);
     } catch (error) {
         console.error('Error saving contact data:', error);
         res.status(500).send('An error occurred while saving your message.');
-    }
-
-    res.send(`<h1>Thanks, ${name}!</h1><p>Your message has been received.</p><a href="/">Back to Home</a>`);
+    }    
 });
 
 
