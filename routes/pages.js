@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 const router = express.Router();
-const Contact = require('./models/Contact');
+const Contact = require('../models/Contact');
 
 // Home page
 router.get('/', (req, res) => {
