@@ -33,7 +33,6 @@ router.post('/contact', async (req, res) => {
         await newContact.save();
         res.send(`<h1>Thanks, ${name}!</h1><p>Your message has been received.</p><a href="/">Back to Home</a>`);
     } catch (error) {
-        console.error('Error saving contact data:', error);
         res.status(500).send('An error occurred while saving your message.');
     }    
 });
