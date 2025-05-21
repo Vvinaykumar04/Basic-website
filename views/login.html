@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Contact Us</h1>
+  
+  <form action="/login" method="POST">
+    <label for="login_name">Name:</label><br>
+    <input type="text" id="login_name" name="login_name"><br><br>
+
+    <label for="login_email">Email:</label><br>
+    <input type="email" id="login_email" name="login_email"><br><br>
+
+    <label for="login_phone">Phone:</label><br>
+    <input type="number" id="login_phone" name="login_phone"><br><br>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <p>Email: contact@example.com</p>
+  <a href="/">Back to Home</a>
+
+  <!-- jQuery and validation script -->
+  <script src="/js/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('form').on('submit', function (e) {
+        let isValid = true;
+        const login_name = $('#login_name').val().trim();
+        const login_email = $('#login_email').val().trim();
+        const login_phone = $('#login_phone').val().trim();
+
+        $('.error').remove();
+
+        if (login_name === '') {
+          $('#login_name').after('<span class="error" style="color:red;">Name is required</span>');
+          isValid = false;
+        }
+
+        if (login_email === '') {
+          $('#login_email').after('<span class="error" style="color:red;">Email is required</span>');
+          isValid = false;
+        } else if (!/^\S+@\S+\.\S+$/.test(login_email)) {
+          $('#login_email').after('<span class="error" style="color:red;">Enter a valid email</span>');
+          isValid = false;
+        }
+
+        if (login_phone === '') {
+          $('#login_phone').after('<span class="error" style="color:red;">Phone is required</span>');
+          isValid = false;
+        }
+
+        if (!isValid) {
+          e.preventDefault();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

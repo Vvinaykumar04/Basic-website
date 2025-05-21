@@ -32,7 +32,7 @@ router.post('/contact', async (req, res) => {
             <p>Please <a href="/login">login</a> first to send a message.</p>
         `);
     }
-    
+
     const { name, email, message } = req.body;
 
     try {
@@ -42,6 +42,11 @@ router.post('/contact', async (req, res) => {
     } catch (error) {
         res.status(500).send('An error occurred while saving your message.');
     }    
+});
+
+// Login route
+router.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'login.html'));
 });
 
 
