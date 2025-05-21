@@ -26,6 +26,13 @@ router.get('/services', (req, res) => {
 });
 
 router.post('/contact', async (req, res) => {
+    if (!req.session || !req.session.user) {
+        return res.status(401).send(`
+            <h1>Unauthorized</h1>
+            <p>Please <a href="/login">login</a> first to send a message.</p>
+        `);
+    }
+    
     const { name, email, message } = req.body;
 
     try {
